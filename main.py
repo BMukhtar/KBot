@@ -5,6 +5,10 @@ import pandas as pd  # to convert csv to pandas DataFrame
 import numpy as np  # to work np. arrays
 
 """
+Initial setup:
+1) create virtualenv project using pycharm
+
+2) install the following libraries to virtualenv:
 pip install numpy
 pip install pandas
 pip install requests
@@ -31,12 +35,10 @@ def krisha_parse(base_url, headers):
         try:
             pagination = soup.find_all('a', attrs={'class': 'paginator__btn'})
             count = int(pagination[-2].text)
-            # print(count)
-            for i in range(count - 1):
-                url = f'https://krisha.kz/arenda/kvartiry/almaty/?das[rent.period]=2&page={i + 1}'
+            for i in range(3, count - 1):
+                url = 'https://krisha.kz/arenda/kvartiry/almaty/?das[rent.period]=2&page={i}'.format(i=i + 1)
                 if url not in urls:
                     urls.append(url)
-                # print(url)
         except:
             pass
 
