@@ -1,7 +1,15 @@
-# This is a sample Python script.
+import requests  # library to send requests to web site(krisha.kz)
+from bs4 import BeautifulSoup as bs  # library to copy all html-code
+import csv  # library to write info to csv
+import pandas as pd  # to convert csv to pandas DataFrame
+import numpy as np  # to work np. arrays
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+"""
+pip install numpy
+pip install pandas
+pip install requests
+pip install beautifulsoup4
+"""
 
 
 def print_hi(name):
@@ -12,5 +20,3 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
