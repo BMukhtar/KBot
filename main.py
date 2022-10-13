@@ -44,7 +44,7 @@ def krisha_parse(base_url, headers):
             pass
 
         for url in urls:
-            time.sleep(3)
+            time.sleep(1)
             print("parsing: " + url)
             request = session.get(url, headers=headers)
             soup = bs(request.content, 'lxml')
