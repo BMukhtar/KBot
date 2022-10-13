@@ -9,6 +9,7 @@ pip install numpy
 pip install pandas
 pip install requests
 pip install beautifulsoup4
+pip install lxml
 """
 
 headers = {
