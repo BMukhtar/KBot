@@ -18,7 +18,7 @@ pip install lxml
 
 headers = {
     'accept': '*/*',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
 }
 
 base_url = 'https://krisha.kz/arenda/kvartiry/almaty/?das[rent.period]=2&page=2'
@@ -32,22 +32,22 @@ def krisha_parse(base_url, headers):
     request = session.get(base_url, headers=headers)
     if request.status_code == 200:
         soup = bs(request.content, 'lxml')
-        try:
-            pagination = soup.find_all('a', attrs={'class': 'paginator__btn'})
-            count = int(pagination[-2].text)
-            for i in range(3, count - 1):
-                url = 'https://krisha.kz/arenda/kvartiry/almaty/?das[rent.period]=2&page={i}'.format(i=i + 1)
-                if url not in urls:
-                    urls.append(url)
-        except:
-            pass
+        # try:
+        #     pagination = soup.find_all('a', attrs={'class': 'paginator__btn'})
+        #     count = int(pagination[-2].text)
+        #     for i in range(3, count - 1):
+        #         url = 'https://krisha.kz/arenda/kvartiry/almaty/?das[rent.period]=2&page={i}'.format(i=i + 1)
+        #         if url not in urls:
+        #             urls.append(url)
+        # except:
+        #     pass
 
         for url in urls:
             request = session.get(url, headers=headers)
             soup = bs(request.content, 'lxml')
-            divs = soup.find_all('div', attrs={'class': 'a-card__body ddl_product_link'})
+            divs = soup.find_all('div', attrs={'class': 'a-card a-storage-live ddl_product ddl_product_link not-colored is-visible'})
             for div in divs:
-                title = div.find('a', attrs={'class': 'a-a-card__title link'}).text
+                title = div.find('a', attrs={'class': 'a-card__title'}).value
                 price = div.find('div', attrs={'class': 'a-card__price'}).text
                 href = div.find('a', attrs={'class': 'a-card__title'})['href']
                 address = div.find('div', attrs={'class': 'a-card__subtitle'}).text
